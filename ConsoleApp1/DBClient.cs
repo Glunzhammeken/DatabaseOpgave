@@ -54,7 +54,7 @@ namespace ConsoleApp1
 
           
             SqlCommand command = new SqlCommand(deleteCommandString, connection);
-            Console.WriteLine($"Deleting hotel #{Facility_no}");
+            Console.WriteLine($"Deleting Facility #{Facility_no}");
             int numberOfRowsAffected = command.ExecuteNonQuery();
 
             Console.WriteLine($"Number of rows affected: {numberOfRowsAffected}");
@@ -72,7 +72,7 @@ namespace ConsoleApp1
             Console.WriteLine($"SQL applied: {updateCommandString}");
 
             SqlCommand command = new SqlCommand(updateCommandString, connection);
-            Console.WriteLine($"Updating hotel #{Facility.Facility_No}");
+            Console.WriteLine($"Updating Facility #{Facility.Facility_No}");
             int numberOfRowsAffected = command.ExecuteNonQuery();
 
             Console.WriteLine($"Number of rows affected: {numberOfRowsAffected}");
@@ -92,7 +92,7 @@ namespace ConsoleApp1
           
             SqlCommand command = new SqlCommand(insertCommandString, connection);
 
-            Console.WriteLine($"Creating hotel #{Facility.Facility_No}");
+            Console.WriteLine($"Creating Facility #{Facility.Facility_No}");
             int numberOfRowsAffected = command.ExecuteNonQuery();
 
             Console.WriteLine($"Number of rows affected: {numberOfRowsAffected}");
@@ -208,7 +208,7 @@ namespace ConsoleApp1
                 ListAllFacility(connection);
 
            
-                facility newHotel = new facility()
+                facility newFacility = new facility()
                 {
                     Facility_No = GetMaxFacilityNo(connection) + 1,
                     Name = "New Facility",
@@ -216,30 +216,30 @@ namespace ConsoleApp1
                 };
 
               
-                InsertFacility(connection, newHotel);
+                InsertFacility(connection, newFacility);
 
                
                 ListAllFacility(connection);
 
             
-                facility hotelToBeUpdated = GetFacility(connection, newHotel.Facility_No);
+                facility FacilityToBeUpdated = GetFacility(connection, newFacility.Facility_No);
 
-             
-                hotelToBeUpdated.Name += "(updated)";
+
+                FacilityToBeUpdated.Name += "(updated)";
 
 
                 
-                UpdateFacility(connection, hotelToBeUpdated);
+                UpdateFacility(connection, FacilityToBeUpdated);
 
                 
                 ListAllFacility(connection);
 
-                
-                facility hotelToBeDeleted = GetFacility(connection, hotelToBeUpdated.Facility_No);
+
+                facility FacilityToBeDeleted = GetFacility(connection, FacilityToBeUpdated.Facility_No);
 
              
-                GetFacility(connection, hotelToBeDeleted.Facility_No);
-
+                GetFacility(connection, FacilityToBeDeleted.Facility_No);
+                DeleteFacility(connection, FacilityToBeDeleted.Facility_No);
               
                 ListAllFacility(connection);
             }
